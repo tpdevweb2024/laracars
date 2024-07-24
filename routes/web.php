@@ -13,6 +13,12 @@ Route::get("/data", [PagesController::class, "data"])->name('data');
 
 // CARS ROUTES
 Route::get("/cars", [CarController::class, "index"])->name("cars.index");
+Route::get("/cars/{id}", [CarController::class, "show"])->name("cars.show");
+Route::get("cars/create", [CarController::class, "create"])->name("cars.create");
+Route::post("cars/store", [CarController::class, "store"])->name("cars.store");
+Route::get("cars/edit/{id}", [CarController::class, "edit"])->name("cars.edit");
+Route::patch("cars/update/{id}", [CarController::class, "update"])->name("cars.update");
+Route::delete("cars/destroy/{id}", [CarController::class, "destroy"])->name("cars.destroy");
 
 // ARTICLES
 Route::get("/blog/article/{slug}", [PagesController::class, "article"])->name('article');
