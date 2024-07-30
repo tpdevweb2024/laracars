@@ -11,7 +11,7 @@ class CarRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,12 @@ class CarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "brand" => "required|min:2|max:255|unique",
+            "brand" => "required|min:2|max:255",
             "model" => "required|min:2|max:255",
             "kilometers" => "required|numeric",
             "price" => "required|numeric",
+            "owner_id" => "required",
+            "picture" => "required|image|mimes:jpeg,png,jpg|max:9000",
         ];
     }
 
@@ -43,6 +45,11 @@ class CarRequest extends FormRequest
             "kilometers.numeric" => "Le kilomètrage doit être un nombre",
             "price.required" => "Le prix est requis",
             "price.numeric" => "Le prix doit être un nombre",
+            "owner_id.required" => "Le propriétaire est requis",
+            "picture.required" => "La photo est requise",
+            "picture.image" => "Le fichier doit être une image",
+            "picture.mimes" => "Le fichier doit être de type jpeg, png ou jpg",
+            "picture.max" => "Le fichier ne doit pas avoir plus de 9000 kilo-octets",
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -34,6 +35,9 @@ class CarController extends Controller
      */
     public function store(CarRequest $request)
     {
+        // Traiter le fichier uploadé
+        $fileName = Storage::disk('public')->put('cars', $request->picture);
+
         // Recevoir le formulaire et l'enregistrer dans la BDD
         $car = new Car();
         $car->brand = $request->brand;
@@ -41,6 +45,8 @@ class CarController extends Controller
         $car->kilometers = $request->kilometers;
         $car->is_new = $request->kilometers == 0 ? true : false;
         $car->price = $request->price;
+        $car->owner_id = $request->owner_id;
+        $car->picture = $fileName;
         $car->save(); // INSERT INTO cars ...
         return redirect()->route('cars.index');
     }
@@ -50,7 +56,7 @@ class CarController extends Controller
      */
     public function show(mixed $id)
     {
-        $car = Car::find($id);
+        $car = Car::findOrFail($id);
         return view('cars/show', [
             'car' => $car
         ]);

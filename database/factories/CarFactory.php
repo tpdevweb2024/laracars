@@ -23,6 +23,8 @@ class CarFactory extends Factory
             "kilometers"    => $isNew ? 0 : fake()->numberBetween(0, 700000),
             "is_new"        => $isNew,
             "price"         => fake()->randomFloat(2, 0, 100000),
+            "owner_id"      => fake()->numberBetween(1, 10),
+            "picture"       => fake()->imageUrl(),
         ];
     }
 }

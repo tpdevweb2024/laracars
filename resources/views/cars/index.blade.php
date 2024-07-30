@@ -11,6 +11,7 @@
             <p>Modele : {{ $car->model }}</p>
             <p>Kilometrage : {{ $car->kilometers }}</p>
             <p>Créée le : {{ $car->created_at->format('d/m/Y H:i:s') }}</p>
+            <p><img src="{{ Storage::url($car->picture) }}" alt=""></p>
         </div>
     @endforeach
 

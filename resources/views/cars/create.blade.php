@@ -13,7 +13,7 @@
         </ul>
     @endif
 
-    <form action="{{ route('cars.store') }}" method="post">
+    <form action="{{ route('cars.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div>
             <label for="brand">Marque</label>
@@ -34,6 +34,13 @@
             <label for="price">Prix</label>
             <input type="number" name="price" id="price">
         </div>
+
+        <div>
+            <label for="picture">Image</label>
+            <input type="file" name="picture" id="picture">
+        </div>
+
+        <input type="hidden" name="owner_id" value="1">
 
         <button type="submit">Ajouter</button>
     </form>
